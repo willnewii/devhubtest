@@ -102,4 +102,10 @@ export default {
     padding-bottom: 15px;
   }
 }
+
+@media screen and (max-width: 960px) {
+    .card {
+        width: 300px;
+    }
+}
 </style>
