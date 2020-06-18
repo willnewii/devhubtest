@@ -39,8 +39,6 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  console.log(to.name);
-  
   if (noCheck.includes(to.name)) {
     next();
   } else {

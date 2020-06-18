@@ -38,7 +38,7 @@ body,
 }
 
 .form {
-  width: 30vw;
+  width: 400px;
   margin-bottom: 100px;
   border: 1px #ccc solid;
   padding: 40px;
