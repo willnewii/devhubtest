@@ -11,7 +11,7 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
 html,
 body,
 #app {
@@ -27,5 +27,31 @@ body,
 
 .primary {
   color: #f8991d;
+}
+
+.login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.form {
+  width: 30vw;
+  margin-bottom: 100px;
+  border: 1px #ccc solid;
+  padding: 40px;
+  border-radius: 5px;
+  text-align: center;
+  .last-item {
+    margin-bottom: 0;
+  }
+}
+
+@media screen and (max-width: 960px) {
+    .form {
+        width: 70vw;
+    }
 }
 </style>

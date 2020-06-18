@@ -14,12 +14,16 @@ Amplify.configure(awsconfig);
 
 Vue.config.productionTip = false;
 
-new Vue({
-  router,
-  store,
-  render: (h) => h(App),
-}).$mount("#app");
-
-Auth.currentAuthenticatedUser().catch(() => {
-  router.push({ name: "Login" });
-});
+Auth.currentAuthenticatedUser()
+  .then((user) => {
+    console.log(user);
+    
+    Vue.prototype.$user = user;
+  })
+  .finally(() => {
+    new Vue({
+      router,
+      store,
+      render: (h) => h(App),
+    }).$mount("#app");
+  });

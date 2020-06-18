@@ -44,6 +44,7 @@
 <script>
 import { Auth } from "aws-amplify";
 import Card from "../components/Card";
+import Vue from "vue";
 // @ is an alias to /src
 export default {
   name: "Home",
@@ -57,6 +58,7 @@ export default {
           onOk: async () => {
             try {
               let data = await Auth.signOut();
+              Vue.prototype.$user = null ;
               this.$router.push({ name: "Login" });
             } catch (error) {
               console.log("error signing out: ", error);

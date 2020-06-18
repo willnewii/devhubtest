@@ -6,6 +6,8 @@ import { Auth } from "aws-amplify";
 
 Vue.use(VueRouter);
 
+const noCheck = ["Login", "Register"];
+
 const routes = [
   {
     path: "/",
@@ -36,7 +38,19 @@ const router = new VueRouter({
   routes,
 });
 
-console.log(Vue.$user);
-
+router.beforeEach((to, from, next) => {
+  console.log(to.name);
+  
+  if (noCheck.includes(to.name)) {
+    next();
+  } else {
+    console.log(Vue.prototype.$user);
+    if (Vue.prototype.$user) {
+      next();
+    } else {
+      next({ name: "Login" });
+    }
+  }
+});
 
 export default router;
