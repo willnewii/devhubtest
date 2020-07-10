@@ -13,7 +13,7 @@
           </Input>
         </FormItem>
         <FormItem>
-          <Button type="primary" @click="handleSubmit('formInline')">登录</Button>
+          <Button type="primary" @click="handleSubmit('formInline')" :loading="loading">登录</Button>
         </FormItem>
         <FormItem class="last-item">
           <span>已有账号?<a href="#/register">注册</a></span>
@@ -33,6 +33,7 @@ export default {
   components: {},
   data() {
     return {
+      loading: false,
       formInline: {
         user: "",
         password: "",
@@ -49,6 +50,7 @@ export default {
   created() {},
   methods: {
     async SignIn() {
+      this.loading = true;
       try {
         const user = await Auth.signIn({
           username: this.formInline.user,
@@ -56,27 +58,25 @@ export default {
         });
 
         if (user) {
+          this.$Message.success("登录成功");
           Vue.prototype.$user = user;
           this.$router.push({ name: "Home" });
         }
       } catch (error) {
-        console.log("error signing in", error);
+        this.$Message.error(error.message);
       }
+      this.loading = false;
     },
     handleSubmit(name) {
       this.$refs[name].validate((valid) => {
-        console.log(valid);
         if (valid) {
           this.SignIn();
-          this.$Message.success("Success!");
         } else {
-          this.$Message.error("Fail!");
+          this.$Message.error("请检查表单~");
         }
       });
     },
   },
 };
 </script>
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>
